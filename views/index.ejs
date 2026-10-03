@@ -1,7 +1,11 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
+
     <title>Student Management</title>
+
 </head>
 
 <body>
@@ -9,6 +13,7 @@
     <h1>Student Management System</h1>
 
     <form action="/students/search" method="GET">
+
         <input
             type="text"
             name="keyword"
@@ -16,8 +21,11 @@
         >
 
         <button type="submit">
+
             Search
+
         </button>
+
     </form>
 
     <a href="/students/add">Add Student</a>
@@ -29,24 +37,36 @@
     <table border="1" cellpadding="10">
 
         <tr>
+
             <th>ID</th>
+
             <th>Student ID</th>
+
             <th>Name</th>
+
             <th>Course</th>
+
             <th>Year</th>
+
             <th>Email</th>
+
+            <th>Actions</th>
+
         </tr>
 
         <% students.forEach(student => { %>
 
         <tr>
+
             <td><%= student.id %></td>
 
             <td><%= student.student_id %></td>
 
             <td>
+
                 <%= student.first_name %>
                 <%= student.last_name %>
+
             </td>
 
             <td><%= student.course %></td>
@@ -54,6 +74,25 @@
             <td><%= student.year_level %></td>
 
             <td><%= student.email %></td>
+
+            <td>
+
+                <a href="/students/edit/<%= student.id %>">Edit</a>
+
+                <form action="/students/delete" method="POST">
+
+                    <input
+                        type="hidden"
+                        name="id"
+                        value="<%= student.id %>"
+                    >
+
+                    <button type="submit">Delete</button>
+
+                </form>
+
+            </td>
+
         </tr>
 
         <% }); %>
@@ -61,4 +100,5 @@
     </table>
 
 </body>
+
 </html>
