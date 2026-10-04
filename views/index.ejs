@@ -1,103 +1,143 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
 
     <title>Student Management</title>
 
+    <link rel="stylesheet" href="/css/style.css">
+
 </head>
 
 <body>
 
-    <h1>Student Management System</h1>
+    <header>
 
-    <form action="/students/search" method="GET">
+        <h1>Student Management System</h1>
 
-        <input
-            type="text"
-            name="keyword"
-            placeholder="Search student..."
-        >
+        <nav>
 
-        <button type="submit">
+            <a href="/">Student List</a>
 
-            Search
+            <a href="/students/add">Add Student</a>
 
-        </button>
+        </nav>
 
-    </form>
+    </header>
 
-    <a href="/students/add">Add Student</a>
+    <div class="container">
 
-    <hr>
+        <h2 class="page-title">Student List</h2>
 
-    <h2>Student List</h2>
+        <div class="search-area">
 
-    <table border="1" cellpadding="10">
+            <form
+                action="/students/search"
+                method="GET"
+                style="display: flex; gap: 10px; flex: 1;"
+            >
 
-        <tr>
+                <input
+                    type="text"
+                    name="keyword"
+                    placeholder="Search student..."
+                >
 
-            <th>ID</th>
+                <button type="submit">Search</button>
 
-            <th>Student ID</th>
+            </form>
 
-            <th>Name</th>
+            <a href="/students/add" class="btn btn-add">
+                Add Student
+            </a>
 
-            <th>Course</th>
+        </div>
 
-            <th>Year</th>
+        <div class="table-container">
 
-            <th>Email</th>
+            <table>
 
-            <th>Actions</th>
+                <tr>
 
-        </tr>
+                    <th>ID</th>
 
-        <% students.forEach(student => { %>
+                    <th>Student ID</th>
 
-        <tr>
+                    <th>Name</th>
 
-            <td><%= student.id %></td>
+                    <th>Course</th>
 
-            <td><%= student.student_id %></td>
+                    <th>Year</th>
 
-            <td>
+                    <th>Email</th>
 
-                <%= student.first_name %>
-                <%= student.last_name %>
+                    <th>Actions</th>
 
-            </td>
+                </tr>
 
-            <td><%= student.course %></td>
+                <% students.forEach(student => { %>
 
-            <td><%= student.year_level %></td>
+                <tr>
 
-            <td><%= student.email %></td>
+                    <td><%= student.id %></td>
 
-            <td>
+                    <td><%= student.student_id %></td>
 
-                <a href="/students/edit/<%= student.id %>">Edit</a>
+                    <td>
+                        <%= student.first_name %>
+                        <%= student.last_name %>
+                    </td>
 
-                <form action="/students/delete" method="POST">
+                    <td><%= student.course %></td>
 
-                    <input
-                        type="hidden"
-                        name="id"
-                        value="<%= student.id %>"
-                    >
+                    <td><%= student.year_level %></td>
 
-                    <button type="submit">Delete</button>
+                    <td><%= student.email %></td>
 
-                </form>
+                    <td>
 
-            </td>
+                        <div class="actions">
 
-        </tr>
+                            <a
+                                href="/students/edit/<%= student.id %>"
+                                class="btn btn-edit"
+                            >
+                                Edit
+                            </a>
 
-        <% }); %>
+                            <form
+                                action="/students/delete"
+                                method="POST"
+                            >
 
-    </table>
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value="<%= student.id %>"
+                                >
+
+                                <button
+                                    type="submit"
+                                    class="btn-delete"
+                                >
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                <% }); %>
+
+            </table>
+
+        </div>
+
+    </div>
 
 </body>
 
